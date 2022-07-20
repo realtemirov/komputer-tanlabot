@@ -31,7 +31,7 @@ public partial class BotUpdateHandler
         await client.EditMessageCaptionAsync(
                             chatId: message.Chat.Id,
                             messageId: message.MessageId,
-                            caption: "📁 Office dasturlardan ishlatadiganlaringizni tanlang: ",
+                            caption: "Kerakli dasturni tanlang: ",
                             replyMarkup: MarkupHelpers.GetInlineKeyboardMatrix(StringConstants.Programers, 3),
                             cancellationToken: token);
     }
