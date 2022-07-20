@@ -118,7 +118,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="greeting" xml:space="preserve">
-    <value>Hello &lt;strong&gt;{0}&lt;/strong&gt;, &amp;#10;&amp;#10;This is a super 🤖 with super abilities 🦹🏻‍♂️! &amp;#10;&amp;#10;To get started, please &lt;strong&gt;Select Language&lt;/strong&gt; below 👇</value>
+    <value>👋 Hello &lt;strong&gt;{0}&lt;/strong&gt;, &amp;#10;&amp;#10;This is a super 🤖 with super abilities 🦹🏻‍♂️! &amp;#10;&amp;#10;To get started, please &lt;strong&gt;Select Language&lt;/strong&gt; below 👇</value>
+    <comment/>
+  </data>
+  <data name="ourservice" xml:space="preserve">
+    <value>💻 You can find out what kind of computer is right for you by choosing the right programs</value>
     <comment/>
   </data>
 </root>

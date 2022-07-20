@@ -12,6 +12,14 @@ public partial class BotUpdateHandler
         var from = query.From;
 
         _logger.LogInformation("Received CallbackQuery from {from.Firstname}: {query.Data}", from?.FirstName, query.Data);
+
+        var handler = query.Message.Text switch
+        {
+            "office" => OfficeAsync(client, query.Message, token),
+            _ => Task.CompletedTask
+        };
+        
+        await handler;
     }
 }
 

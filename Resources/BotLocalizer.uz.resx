@@ -118,7 +118,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="greeting" xml:space="preserve">
-    <value>Salom &lt;strong&gt;{0}&lt;/strong&gt;,  &amp;#10;&amp;#10;Bu super qobilyatlarga 🦹🏻‍♂️ ega super 🤖.  &amp;#10;&amp;#10;Boshlash uchun &lt;strong&gt;Tilni tanlang&lt;/strong&gt;👇</value>
+    <value>👋 Salom &lt;strong&gt;{0}&lt;/strong&gt;,  &amp;#10;&amp;#10;Bu super qobilyatlarga 🦹🏻‍♂️ ega super 🤖.  &amp;#10;&amp;#10;Boshlash uchun &lt;strong&gt;Tilni tanlang&lt;/strong&gt;👇</value>
+    <comment/>
+  </data>
+  <data name="ourservice" xml:space="preserve">
+    <value>💻 Kerakli dasturlarni tanlab sizga qanday komputer mosligini bilib olishingiz mumkin</value>
     <comment/>
   </data>
 </root>

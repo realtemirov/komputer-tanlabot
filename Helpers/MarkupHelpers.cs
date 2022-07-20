@@ -25,6 +25,8 @@ public static class MarkupHelpers
     public static ReplyKeyboardMarkup GetReplyKeyboardMarkup(string[] keys, int columns = 2)
     {
         var buttons = keys.Select(k => new KeyboardButton(k));
-        return new ReplyKeyboardMarkup(buttons);
+        var keyboardMarkup = new ReplyKeyboardMarkup(buttons);
+        keyboardMarkup.ResizeKeyboard = true;
+        return keyboardMarkup;
     }
 }

@@ -23,6 +23,7 @@ public partial class BotUpdateHandler : IUpdateHandler
         _scopeFactory = scopeFactory;
     }
     
+
     public Task HandlePollingErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)
     {
         _logger.LogInformation("Error occured with Telegram Bot: {e.Message}", exception);
@@ -72,6 +73,7 @@ public partial class BotUpdateHandler : IUpdateHandler
             _ => update?.Message?.From
         };
 
+
         var result = await _userService.AddUserAsync(new Entity.User()
         {
             FirstName = from.FirstName,
@@ -83,6 +85,7 @@ public partial class BotUpdateHandler : IUpdateHandler
             CreatedAt = DateTimeOffset.UtcNow,
             LastInteractionAt = DateTimeOffset.UtcNow
         });
+
 
         if(result.IsSuccess)
         {

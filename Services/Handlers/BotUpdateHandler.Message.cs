@@ -44,24 +44,25 @@ public partial class BotUpdateHandler
             "O'zbekcha" or "Русский" or "English" => HandleLanguageAsync(client, message, token),
             _ => Task.CompletedTask
         };
-
+        
         await handler;
         
     }
 
+
+    // til tanlanganda
     private async Task HandleLanguageAsync(ITelegramBotClient client, Message message, CancellationToken token)
     {
         var cultureString = StringConstants.LanguageNames.FirstOrDefault(v => v.Value == message.Text).Key;
+        
         await _userService.UpdateLanguageCodeAsync(message.From.Id, cultureString);
 
         await client.DeleteMessageAsync(message.Chat.Id, message.MessageId, token);
 
         await client.SendChatActionAsync(message.Chat.Id, ChatAction.UploadPhoto, token);
 
-        var photoUrl = "https://ilmhub.uz/assets/images/courses/netbootcamp.png";
-
         var root = Directory.GetCurrentDirectory();
-        var filePath = Path.Combine(root, "backenddotnet.png");
+        var filePath = Path.Combine(root, "main.jpg");
 
         var bytes = await System.IO.File.ReadAllBytesAsync(filePath, token);
 
@@ -70,20 +71,21 @@ public partial class BotUpdateHandler
         await client.SendPhotoAsync(
             message.Chat.Id,
             photo: stream,
-            caption: "Nima gaplar",
-            replyMarkup: new ReplyKeyboardRemove(),
+            caption: _localizer["ourservice", message.From?.FirstName ?? "👻 Something went wrong"],
+            replyMarkup: MarkupHelpers.GetInlineKeyboardMatrix(StringConstants.Programers,3),
             cancellationToken: token);
     }
 
+    // start bosilganda
     private async Task HandleStartAsync(ITelegramBotClient client, Message message, CancellationToken token)
     {
         var from = message.From;
-
+        
         await client.SendTextMessageAsync(
-                chatId: message.Chat.Id,
-                text: _localizer["greeting", from?.FirstName ?? "👻"],
-                replyMarkup: MarkupHelpers.GetReplyKeyboardMarkup(StringConstants.LanguageNames.Values.ToArray(), 3),
-                parseMode: ParseMode.Html,
-                cancellationToken: token);
+                            chatId: message.Chat.Id,
+                            text: _localizer["greeting", from?.FirstName ?? "👻"],
+                            replyMarkup: MarkupHelpers.GetReplyKeyboardMarkup(StringConstants.LanguageNames.Values.ToArray(), 3),
+                            parseMode: ParseMode.Html,
+                            cancellationToken: token);
     }
 }

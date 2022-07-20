@@ -11,5 +11,6 @@ public class User
     public string? LanguageCode { get; set; } = "uz";
 
     public DateTimeOffset CreatedAt { get; set; }
+    
     public DateTimeOffset LastInteractionAt { get; set; }
 }
