@@ -1,3 +1,5 @@
+﻿using bot.Constants;
+using bot.Helpers;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
@@ -13,13 +15,26 @@ public partial class BotUpdateHandler
 
         _logger.LogInformation("Received CallbackQuery from {from.Firstname}: {query.Data}", from?.FirstName, query.Data);
 
-        var handler = query.Message.Text switch
+        var handler = query.Data switch
         {
             "office" => OfficeAsync(client, query.Message, token),
+            "menu" => HandleMenu(client,query.Message,token),
             _ => Task.CompletedTask
         };
-        
+
         await handler;
     }
+
+    private async Task HandleMenu(ITelegramBotClient client, Message message, CancellationToken token)
+    {
+        var from = message.From;
+        await client.EditMessageCaptionAsync(
+                            chatId: message.Chat.Id,
+                            messageId: message.MessageId,
+                            caption: "📁 Office dasturlardan ishlatadiganlaringizni tanlang: ",
+                            replyMarkup: MarkupHelpers.GetInlineKeyboardMatrix(StringConstants.Programers, 3),
+                            cancellationToken: token);
+    }
+
 }
 

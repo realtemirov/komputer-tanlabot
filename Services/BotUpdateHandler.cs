@@ -62,7 +62,7 @@ public partial class BotUpdateHandler : IUpdateHandler
         }
     }
 
-    private async Task<CultureInfo> GetCultureForUser(Update update)
+    private async Task<CultureInfo> GetCultureForUser(Update? update)
     {
         User? from = update.Type switch
         {
@@ -78,7 +78,8 @@ public partial class BotUpdateHandler : IUpdateHandler
         {
             FirstName = from.FirstName,
             LastName = from.LastName,
-            ChatId = update.Message.Chat.Id,
+            ChatId = ( update.Message == null ? update.CallbackQuery.Message.Chat.Id:update.Message.Chat.Id),
+            IsBot = from.IsBot,
             UserId = from.Id,
             Username = from.Username,
             LanguageCode = from.LanguageCode,

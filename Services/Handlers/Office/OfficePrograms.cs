@@ -1,4 +1,4 @@
-using System.Web;
+﻿using System.Web;
 using bot.Constants;
 using bot.Services;
 using bot.Helpers;
@@ -16,9 +16,11 @@ public partial class BotUpdateHandler
     {
         var from = message.From;
         
-        await client.SendTextMessageAsync(
+        await client.EditMessageCaptionAsync(
                             chatId: message.Chat.Id,
-                            text: "office bosildi",
+                            messageId: message.MessageId,
+                            caption: "📁 Office dasturlardan ishlatadiganlaringizni tanlang: ",
+                            replyMarkup:MarkupHelpers.GetInlineKeyboardMatrix(StringConstants.OfficePrograms,3),
                             cancellationToken: token);
     }
 }

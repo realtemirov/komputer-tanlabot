@@ -121,11 +121,8 @@ C:\Users\temir\Downloads\net-bootcamp-002-main\05-07\bot\obj\Debug\net6.0\bot.As
 C:\Users\temir\Downloads\net-bootcamp-002-main\05-07\bot\obj\Debug\net6.0\bot.csproj.CoreCompileInputs.cache
 C:\Users\temir\Downloads\net-bootcamp-002-main\05-07\bot\obj\Debug\net6.0\bot.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\temir\Downloads\net-bootcamp-002-main\05-07\bot\obj\Debug\net6.0\bot.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\temir\Downloads\net-bootcamp-002-main\05-07\bot\obj\Debug\net6.0\en\bot.resources.cs
 C:\Users\temir\Downloads\net-bootcamp-002-main\05-07\bot\obj\Debug\net6.0\en\bot.resources.dll
-C:\Users\temir\Downloads\net-bootcamp-002-main\05-07\bot\obj\Debug\net6.0\ru\bot.resources.cs
 C:\Users\temir\Downloads\net-bootcamp-002-main\05-07\bot\obj\Debug\net6.0\ru\bot.resources.dll
-C:\Users\temir\Downloads\net-bootcamp-002-main\05-07\bot\obj\Debug\net6.0\uz\bot.resources.cs
 C:\Users\temir\Downloads\net-bootcamp-002-main\05-07\bot\obj\Debug\net6.0\uz\bot.resources.dll
 C:\Users\temir\Downloads\net-bootcamp-002-main\05-07\bot\obj\Debug\net6.0\staticwebassets.build.json
 C:\Users\temir\Downloads\net-bootcamp-002-main\05-07\bot\obj\Debug\net6.0\staticwebassets.development.json

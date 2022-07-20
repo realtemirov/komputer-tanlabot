@@ -16,4 +16,14 @@ public static class StringConstants
         { "video", "Video Editor’lar" },
         { "muhitlar", "Dasturlash muhitlari" },
     };
+
+    public static Dictionary<string, string> OfficePrograms => new()
+    {
+        {"office-msword", "Microsoft Word" },
+        {"office-msexcel", "Microsoft Excel"},
+        {"office-mspower","Microsoft Power Point" },
+        {"office-adobe","Adobe Acrobat" },
+        { "menu", "Ortga 🔙"},
+    };
+
 }
