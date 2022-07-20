@@ -1401,24 +1401,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\temir\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\ogabe\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\temir\\Downloads\\net-bootcamp-002-main\\05-07\\bot\\bot.csproj",
+      "projectUniqueName": "C:\\Users\\ogabe\\projects\\tempbot\\bot.csproj",
       "projectName": "bot",
-      "projectPath": "C:\\Users\\temir\\Downloads\\net-bootcamp-002-main\\05-07\\bot\\bot.csproj",
-      "packagesPath": "C:\\Users\\temir\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\temir\\Downloads\\net-bootcamp-002-main\\05-07\\bot\\obj\\",
+      "projectPath": "C:\\Users\\ogabe\\projects\\tempbot\\bot.csproj",
+      "packagesPath": "C:\\Users\\ogabe\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ogabe\\projects\\tempbot\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\temir\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\ogabe\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
