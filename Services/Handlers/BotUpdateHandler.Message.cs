@@ -70,7 +70,7 @@ public partial class BotUpdateHandler
         await client.SendPhotoAsync(
             message.Chat.Id,
             photo: stream,
-            caption: "Nima gaplar",
+            caption: "Ilmhub IT School",
             replyMarkup: new ReplyKeyboardRemove(),
             cancellationToken: token);
     }
