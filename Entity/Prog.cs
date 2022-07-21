@@ -11,4 +11,5 @@ public class Prog
     public EProgType ProgType { get; set; }
 
     public double Point { get; set; }
+    
 }

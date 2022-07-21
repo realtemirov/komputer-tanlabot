@@ -37,6 +37,47 @@ namespace bot.Migrations
                     b.ToTable("ChosenApps");
                 });
 
+            modelBuilder.Entity("bot.Entity.Kompyuter", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("GPU")
+                        .HasColumnType("TEXT");
+
+                    b.Property<double>("Grade")
+                        .HasColumnType("REAL");
+
+                    b.Property<string>("LinkOfPic")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ModelName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("OS")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Price")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Processor")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("RAM")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ScreenSize")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Storage")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Kompyuters");
+                });
+
             modelBuilder.Entity("bot.Entity.Prog", b =>
                 {
                     b.Property<Guid>("Id")
