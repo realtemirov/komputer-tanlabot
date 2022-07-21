@@ -7,6 +7,8 @@ using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
 using bot.Entity;
+using System.Text;
+using Telegram.Bot.Types.InputFiles;
 
 namespace bot.Services;
 
@@ -50,24 +52,35 @@ public partial class BotUpdateHandler
         
         var maxPoint = _progService.GetAllProgsAsync().Result.Where(p => allChosenApp.Contains(p.Id)).Max(p => p.Point);
 
-        var myComp = _computerService.GetAllCompsAsync().Result.Where(c => c.Grade >= maxPoint).MinBy(c => c.Price);
+        var myComps = _computerService.GetAllCompsAsync().Result.Where(c => c.Grade >= maxPoint).OrderBy(c => c.Price).ToList();
 
-        var resultAddComp = _computerService.AddMyKompAsync( new MyComputer
+        var guid = Guid.NewGuid().ToString();
+
+        foreach (var item in myComps)
         {
-            Id = Guid.NewGuid(),
-            UserId = user.Id,
-            ComputerId = myComp.Id,
-            Link = "hello",
-            CreatedAt = DateTimeOffset.Now
+            var resultAddComp = _computerService.AddMyKompAsync( new MyComputer
+            {
+                Id = Guid.NewGuid(),
+                UserId = user.Id,
+                ComputerId = item.Id,
+                Link = guid,
+                CreatedAt = DateTimeOffset.Now
 
-        }).Result;
+            }).Result;
+        }
         await _chosenAppService.DeleteChosenAppAsync(user.Id);
-        string path = $@"Helpers/{myComp.Id}";
-        var file = System.IO.File.Create(path + ".txt");
-        file.Close();
-        System.IO.File.WriteAllText(path + ".txt", myComp.Id.ToString());
 
-        HandleMenu(client, query.Message, token);
+
+        AlertAsync(client, query, token,"Ma'lumotlaringiz yuborildi");
+
+        await client.DeleteMessageAsync(user.Id, query.Message.MessageId, token);
+        await CompToText(myComps);
+
+        await HandleMenu(client, query.Message, token);
+        using(var stream = new FileStream("computer.pdf",FileMode.Open))
+        {
+            await client.SendDocumentAsync(user.Id, new InputOnlineFile(stream,$"{user.FirstName}ning komputerlari.pdf"), cancellationToken: token);                
+        }
     }
 
     private async Task ShowComputersAsync(ITelegramBotClient client, CallbackQuery query, CancellationToken token)
@@ -97,7 +110,7 @@ public partial class BotUpdateHandler
 
     private async Task NoteSelectAsync(ITelegramBotClient client, CallbackQuery query, CancellationToken token)
     {
-
+        
         var message = query.Message;
         var from = message.From;
         var prog = _progService.GetProgAsync(query.Data.ToString()).Result;
@@ -105,6 +118,8 @@ public partial class BotUpdateHandler
         {
             _logger.LogError("Program is null");
         }
+        var queryShort = query.Data.ToString().Split("-")[0];
+
 
         _logger.LogInformation(query.Data);
 
@@ -115,17 +130,52 @@ public partial class BotUpdateHandler
             ProgId = prog.Id,
             ChosenTime = DateTimeOffset.Now
         }).Result;
+        
+        
 
         if (res.IsSuccess)
         {
             _logger.LogInformation(res.ErrorMessage);
-            ProgsAsync(client,query,token);
+            await client.EditMessageCaptionAsync(
+                            chatId: message.Chat.Id,
+                            messageId: message.MessageId,
+                            caption: _progService.GetProgAsync(query.Data).Result.Name + " dasturi tanlandi",
+                            replyMarkup:MarkupHelpers.GetInlineKeyboardMatrix(await GetFromDbAsync(queryShort),3),
+                            cancellationToken: token);
         }
         else
         {
-            AlertAsync(client, query, token);
-            _logger.LogInformation(res.ErrorMessage);
+            
+            AlertAsync(client, query, token,"Boshqa dasturni tanlang, bu avval tanlangan");
+            
+            _logger.LogInformation("alert chiqdi");
+            _logger.LogInformation("alert boldi");                        
         }
 
+    }
+
+    public async Task CompToText(List<Kompyuter> mycomps)
+    {
+        StringBuilder sb = new StringBuilder();
+        foreach (var comp in mycomps)
+        {
+            sb.Append(
+                $"Model: {comp.ModelName}\n" +
+                $"Price: {comp.Price}\n" +
+                $"Grade: {comp.Grade}\n" +
+                $"GPU: {comp.GPU}\n" +
+                $"Processor: {comp.Processor}\n" +
+                $"RAM: {comp.RAM}\n" +
+                $"Storage: {comp.Storage}\n" +
+                $"ScreenSize: {comp.ScreenSize}\n" +
+                $"OS: {comp.OS}\n" +
+                $"Pic: {comp.LinkOfPic}\n" + 
+                $"\n\n"
+            );
+        }
+        
+        System.IO.File.WriteAllText("text.txt",sb.ToString());
+        
+        await bot.Helpers.Convert.ConvertTxtToPdf();
     }
 }

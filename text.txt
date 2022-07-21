@@ -1,0 +1,204 @@
+Model: Acer Nitro 5 2022
+Price: 10 897 500 sum
+Grade: 8,5
+GPU: GeForce RTX™ 3050Ti 4GB
+Processor: Intel® Core™ i5-12500H
+RAM: 16 GB DDR4
+Storage: 512 GB m2 SSD
+ScreenSize: 15.6
+OS: Windows 11
+Pic: Nitro 5 2022
+
+
+Model: HP Pavilion Gaming 15
+Price: 11 050 000 sum
+Grade: 8
+GPU: GeForce RTX™ 3050Ti 4GB
+Processor: AMD® Ryzen™ 5-5600H
+RAM: 16 GB DDR4
+Storage: 512 GB m2 SSD
+ScreenSize: 15.6
+OS: Windows 11
+Pic: Pavilion Gaming 15
+
+
+Model: Acer ‎Aspire 1
+Price: 2 453 000 sum 
+Grade: 3
+GPU: Intel UHD 
+Processor: Intel Celeron N 4500
+RAM: 4 GB DDR4
+Storage: 128 GB PCle SSD
+ScreenSize: 14
+OS: Windows 10
+Pic: Aspire 1
+
+
+Model: Lenovo Chromebook 5i 
+Price: 3 300 000 sum
+Grade: 3
+GPU: Integrated Intel UHD
+Processor: Intel Pentium Gold 7505
+RAM: 4 GB DDR4
+Storage: 128 GB PCle SSD
+ScreenSize: 14
+OS: Chrome OS
+Pic: Lenovo Chromebook 5i
+
+
+Model: Asus Laptop E410
+Price: 3 646 500 sum
+Grade: 3
+GPU: Intel UHD 
+Processor: Intel Celeron N 4020
+RAM: 4 GB DDR4
+Storage: 256 GB NVMe SSD
+ScreenSize: 14
+OS: Windows 11
+Pic: Asus E410
+
+
+Model: Asus VivoBook K413
+Price: 5 525 000 sum
+Grade: 4,5
+GPU: Intel UHD 
+Processor: Intel® Core® i3-1115G4
+RAM: 8 GB DDR4
+Storage: 256 GB M2 SSD
+ScreenSize: 14
+OS: Windows 11
+Pic: VivoBook K413
+
+
+Model: Acer Aspire 5
+Price: 5 764 000 sum
+Grade: 5,5
+GPU: Intel Iris Xe 
+Processor: Intel Core i5-1135G7
+RAM: 8 GB DDR4
+Storage: 256 GB M2 SSD
+ScreenSize: 15.6
+OS: Windows 10
+Pic: Aspire 5
+
+
+Model: Asus Laptop X515
+Price: 6 188 000 sum
+Grade: 5,5
+GPU: Intel Iris Xe 
+Processor: Intel Core i5-1135G7
+RAM: 8 GB DDR4
+Storage: 256 GB m2 SSD
+ScreenSize: 15.5
+OS: Windows 10
+Pic: Asus X515
+
+
+Model: HP Laptop 15
+Price: 6 630 000 sum
+Grade: 5,5
+GPU: Intel Iris Xe 
+Processor: Intel® Core™ i5-1235U
+RAM: 8 GB DDR4
+Storage: 256 GB m2 SSD
+ScreenSize: 15.6
+OS: Windows 11
+Pic: Hp Laptop 15
+
+
+Model: Asus VivoBook Pro 15
+Price: 6 630 000 sum
+Grade: 6
+GPU: Intel Iris Xe 
+Processor: Intel® Core™ i5-11300H
+RAM: 8 GB DDR4
+Storage: 512 GB m2 SSD
+ScreenSize: 15.6
+OS: Windows 11
+Pic: Asus Vivobook Pro 15
+
+
+Model: ASUS VivoBook X513E
+Price: 7 128 000 sum
+Grade: 5,5
+GPU: Intel Iris
+Processor: Intel Core i5-1135G7
+RAM: 8 GB DDR4
+Storage: 256 GB m2 SSD
+ScreenSize: 15.6
+OS: Windows 10
+Pic: Flip 14
+
+
+Model: Asus VivoBook Flip 14
+Price: 7 624 500 sum
+Grade: 5,5
+GPU: Amd Radeon Graphics
+Processor: AMD Ryzen R5-5500U
+RAM: 8 GB DDR4
+Storage: 512 GB m2 SSD
+ScreenSize: 15.6
+OS: Windows 11
+Pic: Flip 14
+
+
+Model: Asus TUF Gaming FX506
+Price: 8 103 000 sum
+Grade: 7
+GPU: GeForce GTX™ 1650 4GB
+Processor: Intel® Core™ i5-10300H
+RAM: 8 GB DDR4
+Storage: 256 GB m2 SSD
+ScreenSize: 15.6
+OS: Windows 11
+Pic: TUF FX506
+
+
+Model: Lenovo Legion 5 15
+Price: 8.5
+Grade: 8,5
+GPU: GeForce RTX™ 3060 6GB
+Processor: Intel® Core™ i5-11400H
+RAM: 16 GB DDR4
+Storage: 512 GB m2 SSD
+ScreenSize: 15.6
+OS: Windows 11
+Pic: Legion 5 15
+
+
+Model: HP ENVY 15 x360
+Price: 9 061 000 sum
+Grade: 5,5
+GPU: Amd Radeon Graphics
+Processor: AMD Ryzen R5-5500U
+RAM: 8 GB DDR4
+Storage: 256 GB m2 SSD
+ScreenSize: 14
+OS: Windows 11
+Pic: Envy 15 x360
+
+
+Model: HP Victus 16
+Price: 9 171 500 sum
+Grade: 7,5
+GPU: GeForce RTX™ 3050 4GB
+Processor: Intel® Core™ i5-11400H
+RAM: 8 GB DDR4
+Storage: 256 GB m2 SSD
+ScreenSize: 16
+OS: Windows 11
+Pic: Victus 16
+
+
+Model: MSI Bravo 15
+Price: 9 945 000 sum
+Grade: 7,5
+GPU: Radeon RX 5500M 4GB
+Processor: AMD® Ryzen™ 7-4800H
+RAM: 8 GB DDR4
+Storage: 256 GB m2 SSD
+ScreenSize: 15.6
+OS: Windows 11
+Pic: Bravo 15
+
+

@@ -3,17 +3,17 @@ using ConvertApiDotNet.Model;
 
 namespace bot.Helpers;
 
-public class Convert
+public static class Convert
 {
-    public async Task ConvertTxtToPdf(string path)
+    public static async Task ConvertTxtToPdf()
     {       
         ConvertApi convertApi = new ConvertApi("BdqUk2GXnWRXdP78");
         ConvertApiResponse result = await convertApi.ConvertAsync("txt", "pdf", new[]
         {
-        new ConvertApiFileParam(path + ".txt")
+        new ConvertApiFileParam("text.txt")
         });
 
         
-        var fileInfo = await result.SaveFileAsync(path + ".pdf");
+        var fileInfo = await result.SaveFileAsync("computer.pdf");
     }
 }

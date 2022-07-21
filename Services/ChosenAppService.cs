@@ -21,7 +21,7 @@ public class ChosenAppService
 
     public async Task<(bool IsSuccess, string ErrorMessage)> AddChosenAppAsync(ChosenApp chosenApp)
     {
-        if (await Exists(chosenApp.ProgId))
+        if (await Exists(chosenApp.ProgId, chosenApp.UserId))
             return (false, "ChosenApp exists");
 
         try
@@ -56,6 +56,6 @@ public class ChosenAppService
         return await _context.ChosenApps.FindAsync(id);
     }
 
-    public async Task<bool> Exists(Guid? id)
-        => await _context.ChosenApps.AnyAsync(p => p.ProgId == id);
+    public async Task<bool> Exists(Guid? id, long userId)
+        => await _context.ChosenApps.Where(u => u.UserId == userId && u.ProgId == id).AnyAsync();
 }
