@@ -1,2 +1,1 @@
-ALTER TABLE Progs
-  ADD Query text;
+SELECT * From ChosenApps;

@@ -1,7 +1,22 @@
+using bot.Data;
+using bot.Entity;
+
 namespace bot.Constants;
 
-public static class StringConstants
+public  class StringConstants
 {
+
+    
+
+    private static BotDbContext _context;
+
+    public StringConstants(BotDbContext context)
+    {
+        _context = context ?? throw new ArgumentNullException(nameof(context));
+    }
+
+    
+
     public static Dictionary<string, string> LanguageNames => new()
     {
         { "uz-Uz", "O'zbekcha" },
@@ -9,28 +24,13 @@ public static class StringConstants
         { "en-Us", "English" },
     };
 
-    public static Dictionary<string, string> Menu => new()
-    {
-        {"computer", "Kompyuter tanlash"},
-        {"my-computers", "Mening komputerlarim"},
-        {"settings", "Sozlamalar"},
-        {"about-us", "Biz haqimizda"},
-    };
-    public static Dictionary<string,string> Programers => new()
-    {
-        { "office", "Offise dasturlari" },
-        { "grafik", "Grafik dizayn" },
-        { "video", "Video Editor’lar" },
-        { "muhitlar", "Dasturlash muhitlari" },
-    };
-
     public static Dictionary<string, string> OfficePrograms => new()
     {
-        {"prog-office-msword", "Microsoft Word" },
+        {"office-msword", "Microsoft Word" },
         {"office-msexcel", "Microsoft Excel"},
         {"office-mspower","Microsoft Power Point" },
         {"office-adobe","Adobe Acrobat" },
-        { "menu", "Ortga 🔙"},
+        {"computer","Nazad" }
     };
 
     public static Dictionary<string, string> ProgsResxToDictionary(string[] progs)
@@ -43,6 +43,7 @@ public static class StringConstants
         result.Add("browser", progs[4]);
         result.Add("social", progs[5]);
         result.Add("game", progs[6]);
+        result.Add("ready","Tayyor");
         return result;
     }
 

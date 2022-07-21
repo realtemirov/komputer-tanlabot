@@ -137,4 +137,8 @@
     <value>Kerakli dasturni tanlang English</value>
     <comment/>
   </data>
+  <data name="office" xml:space="preserve">
+    <value>Office dasturlari eng</value>
+    <comment/>
+  </data>
 </root>

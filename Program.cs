@@ -19,6 +19,7 @@ builder.Services.AddHostedService<BotBackgroundService>();
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<ChosenAppService>();
 builder.Services.AddScoped<ProgService>();
+builder.Services.AddScoped<ComputerService>();
 
 builder.Services.AddLocalization();
 

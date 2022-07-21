@@ -5,12 +5,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace bot.Migrations
 {
-    public partial class DB : Migration
+    public partial class CreateDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "ChoosenApps",
+                name: "ChosenApps",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
@@ -20,7 +20,7 @@ namespace bot.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ChoosenApps", x => x.Id);
+                    table.PrimaryKey("PK_ChosenApps", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -42,6 +42,21 @@ namespace bot.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Kompyuters", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MyComputers",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    UserId = table.Column<long>(type: "INTEGER", nullable: true),
+                    ComputerId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    Link = table.Column<string>(type: "TEXT", nullable: true),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MyComputers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -83,10 +98,13 @@ namespace bot.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ChoosenApps");
+                name: "ChosenApps");
 
             migrationBuilder.DropTable(
                 name: "Kompyuters");
+
+            migrationBuilder.DropTable(
+                name: "MyComputers");
 
             migrationBuilder.DropTable(
                 name: "Progs");

@@ -13,9 +13,21 @@ namespace bot.Services;
 public partial class BotUpdateHandler
 {
 
-    private async Task HandleMenu(ITelegramBotClient client, CallbackQuery query, CancellationToken token)
+    
+
+
+
+
+    private async Task AlertAsync(ITelegramBotClient client, CallbackQuery query, CancellationToken token)
     {
         var message = query.Message;
+        var from = message.From;
+
+        await client.AnswerCallbackQueryAsync(query.Id,"Bu dasturni tanladingiz",true, cancellationToken: token);
+    }
+    
+    private async Task HandleMenu(ITelegramBotClient client, Message message, CancellationToken token)
+    {
         var root = Directory.GetCurrentDirectory();
         var filePath = Path.Combine(root, "main.jpg");
 

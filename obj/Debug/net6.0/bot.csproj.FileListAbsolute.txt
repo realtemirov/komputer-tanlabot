@@ -274,3 +274,4 @@ C:\Users\temir\Downloads\net-bootcamp-002-main\05-07\comp_bot\obj\Debug\net6.0\r
 C:\Users\temir\Downloads\net-bootcamp-002-main\05-07\comp_bot\obj\Debug\net6.0\en\bot.resources.cs
 C:\Users\temir\Downloads\net-bootcamp-002-main\05-07\comp_bot\obj\Debug\net6.0\ru\bot.resources.cs
 C:\Users\temir\Downloads\net-bootcamp-002-main\05-07\comp_bot\obj\Debug\net6.0\uz\bot.resources.cs
+C:\Users\temir\Downloads\net-bootcamp-002-main\05-07\comp_bot\bin\Debug\net6.0\ConvertApi.dll

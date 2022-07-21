@@ -12,7 +12,10 @@ namespace bot.Services;
 
 public partial class BotUpdateHandler
 {
-    private async Task OfficeAsync(ITelegramBotClient client, CallbackQuery query, CancellationToken token)
+
+    
+    
+    private async Task ProgsAsync(ITelegramBotClient client, CallbackQuery query, CancellationToken token)
     {
         var message = query.Message;
         var from = message.From;
@@ -20,8 +23,8 @@ public partial class BotUpdateHandler
         await client.EditMessageCaptionAsync(
                             chatId: message.Chat.Id,
                             messageId: message.MessageId,
-                            caption: "📁 Office dasturlardan ishlatadiganlaringizni tanlang: ",
-                            replyMarkup:MarkupHelpers.GetInlineKeyboardMatrix(StringConstants.OfficePrograms,3),
+                            caption: _localizer["office"],
+                            replyMarkup:MarkupHelpers.GetInlineKeyboardMatrix(await GetFromDbAsync(query.Data.ToString()),3),
                             cancellationToken: token);
-    }    
+    }
 }

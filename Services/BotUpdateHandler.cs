@@ -17,6 +17,8 @@ public partial class BotUpdateHandler : IUpdateHandler
     private ChosenAppService _chosenAppService;
     private ProgService _progService;
 
+    private ComputerService _computerService;
+    
 
     public BotUpdateHandler(
         ILogger<BotUpdateHandler> logger,
@@ -30,14 +32,14 @@ public partial class BotUpdateHandler : IUpdateHandler
     public Task HandlePollingErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)
     {
         _logger.LogInformation("Error occured with Telegram Bot: {e.Message}", exception);
-
+    
         return Task.CompletedTask;
     }
 
     public async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
     {
         using var scope = _scopeFactory.CreateScope();
-
+        _computerService = scope.ServiceProvider.GetRequiredService<ComputerService>();
         _userService = scope.ServiceProvider.GetRequiredService<UserService>();
         _chosenAppService = scope.ServiceProvider.GetRequiredService<ChosenAppService>();
         _progService = scope.ServiceProvider.GetRequiredService<ProgService>();
