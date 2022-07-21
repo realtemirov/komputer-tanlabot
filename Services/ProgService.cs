@@ -17,9 +17,9 @@ public class ProgService
     {
             if(await Exists(prog.Query))
             {
-                if(_context.Prog.Count(x => x.Query == prog.Query)> 1)
+                if(_context.Progs.Count(x => x.Query == prog.Query)> 1)
                 {
-                    _context.Remove(_context.Prog.FirstOrDefault(x => x.Query == prog.Query));
+                    _context.Remove(_context.Progs.FirstOrDefault(x => x.Query == prog.Query));
                     _context.SaveChanges();
                 }
                 return (false, "Prog exists");
@@ -27,7 +27,7 @@ public class ProgService
             }
             try
             {
-                var result = await _context.Prog.AddAsync(prog);
+                var result = await _context.Progs.AddAsync(prog);
                 await _context.SaveChangesAsync();
                 return (true, "Add prog");
             }
@@ -41,10 +41,10 @@ public class ProgService
     public async Task<Prog> GetProgAsync(string query)
     {
         ArgumentNullException.ThrowIfNull(query);
-        ArgumentNullException.ThrowIfNull(_context.Prog);
-        return await _context.Prog.FindAsync(query);
+        ArgumentNullException.ThrowIfNull(_context.Progs);
+        return await _context.Progs.FindAsync(query);
     }
 
     public async Task<bool> Exists(string query)
-        => await _context.Prog.AnyAsync(p => p.Query == query);
+        => await _context.Progs.AnyAsync(p => p.Query == query);
 }

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using bot.Data;
 
@@ -10,9 +11,10 @@ using bot.Data;
 namespace bot.Migrations
 {
     [DbContext(typeof(BotDbContext))]
-    partial class BotDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220721100305_DB")]
+    partial class DB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.6");
@@ -34,7 +36,7 @@ namespace bot.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ChosenApps");
+                    b.ToTable("ChoosenApps");
                 });
 
             modelBuilder.Entity("bot.Entity.Kompyuter", b =>
@@ -98,7 +100,7 @@ namespace bot.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Prog");
+                    b.ToTable("Progs");
                 });
 
             modelBuilder.Entity("bot.Entity.User", b =>

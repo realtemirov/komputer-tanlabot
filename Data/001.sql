@@ -1,1 +1,2 @@
-SELECT COUNT(*) AS Soni FROM Prog;
+ALTER TABLE Progs
+  ADD Query text;

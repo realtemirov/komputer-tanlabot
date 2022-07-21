@@ -1,4 +1,5 @@
-﻿using bot.Constants;
+﻿using System.Globalization;
+using bot.Constants;
 using bot.Helpers;
 using Telegram.Bot;
 using Telegram.Bot.Types;
@@ -14,29 +15,16 @@ public partial class BotUpdateHandler
         var from = query.From;
 
         _logger.LogInformation("Received CallbackQuery from {from.Firstname}: {query.Data}", from?.FirstName, query.Data);
-        
-        var handler = query.Data switch
+        var querySplit = query.Data.Split('-');
+        var handler = querySplit[0] switch
         {
-            "uz-Uz" or "ru-Ru" or "en-Us" => HandleLanguageAsync(client, query, token),
-            "office" => OfficeAsync(client, query.Message, token),
-            "office-msword" => OfficeWordAsync(client, query, token),
-            "menu" => HandleMenu(client,query.Message,token),
+            "uz" or "ru" or "en" => HandleLanguageAsync(client, query, token),
+            "computer" => ComputerAsync(client, query, token),
+            "menu" => HandleMenu(client,query,token),
             _ => Task.CompletedTask
         };
 
         await handler;
     }
-
-    private async Task HandleMenu(ITelegramBotClient client, Message message, CancellationToken token)
-    {
-        var from = message.From;
-        await client.EditMessageCaptionAsync(
-                            chatId: message.Chat.Id,
-                            messageId: message.MessageId,
-                            caption: "Kerakli dasturni tanlang: ",
-                            replyMarkup: MarkupHelpers.GetInlineKeyboardMatrix(StringConstants.Programers, 3),
-                            cancellationToken: token);
-    }
-
 }
 

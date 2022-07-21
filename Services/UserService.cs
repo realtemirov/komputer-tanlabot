@@ -36,14 +36,15 @@ public class UserService
         ArgumentNullException.ThrowIfNull(userId);
         ArgumentNullException.ThrowIfNull(_context.Users);
         ArgumentNullException.ThrowIfNull(_context.Users.FindAsync(userId));
-        return await _context.Users.FindAsync(userId);
+        var userr = _context.Users.FindAsync(userId).Result;
+        return userr;
     }
 
     public async Task<(bool IsSuccess, string? ErrorMessage)> UpdateLanguageCodeAsync(long? userId, string? languageCode)
     {
         ArgumentNullException.ThrowIfNull(languageCode);
 
-        var user = await GetUserAsync(userId);
+        var user = GetUserAsync(userId).Result;
 
         if(user is null)
         {
@@ -59,7 +60,7 @@ public class UserService
 
     public async Task<string?> GetLanguageCodeAsync(long? userId)
     {
-        var user = await GetUserAsync(userId);
+        var user = GetUserAsync(userId).Result;
 
         return user?.LanguageCode;
     }

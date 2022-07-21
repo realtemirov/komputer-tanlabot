@@ -129,4 +129,12 @@
     <value>Komputer tanlash|Mening komputerlarim|Sozlamalar|Kontakt</value>
     <comment/>
   </data>
+  <data name="progs" xml:space="preserve">
+    <value>Office dasturlari|Grafik dizayn|Video Editorlar|Dasturlash muhitlari|Brauzerlar|Ijtimoiy tarmoqlar|O’yinlar</value>
+    <comment/>
+  </data>
+  <data name="computer" xml:space="preserve">
+    <value>Kerakli dasturni tanlang: </value>
+    <comment/>
+  </data>
 </root>
