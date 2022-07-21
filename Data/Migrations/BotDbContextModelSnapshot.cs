@@ -17,19 +17,16 @@ namespace bot.Data.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.6");
 
-            modelBuilder.Entity("bot.Entity.ChoosenApp", b =>
+            modelBuilder.Entity("bot.Entity.ChosenApp", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTimeOffset>("CreatedAt")
+                    b.Property<DateTimeOffset>("ChosenTime")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTimeOffset>("LastInteractionAt")
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("ProgId")
+                    b.Property<Guid?>("ProgId")
                         .HasColumnType("TEXT");
 
                     b.Property<long>("UserId")
@@ -81,7 +78,7 @@ namespace bot.Data.Migrations
                     b.ToTable("Kompyuters");
                 });
 
-            modelBuilder.Entity("bot.Entity.Progs", b =>
+            modelBuilder.Entity("bot.Entity.Prog", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -90,11 +87,14 @@ namespace bot.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Point")
-                        .HasColumnType("INTEGER");
+                    b.Property<double>("Point")
+                        .HasColumnType("REAL");
 
                     b.Property<int>("ProgType")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Query")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
