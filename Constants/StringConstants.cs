@@ -9,6 +9,13 @@ public static class StringConstants
         { "en-Us", "English" },
     };
 
+    public static Dictionary<string, string> Menu => new()
+    {
+        {"computer", "Kompyuter tanlash"},
+        {"my-computers", "Mening komputerlarim"},
+        {"settings", "Sozlamalar"},
+        {"about-us", "Biz haqimizda"},
+    };
     public static Dictionary<string,string> Programers => new()
     {
         { "office", "Offise dasturlari" },
@@ -26,4 +33,14 @@ public static class StringConstants
         { "menu", "Ortga 🔙"},
     };
 
+    /*public static Dictionary<string, string> MenuResxToDictionary(string[] menu)
+    {
+        var result = new Dictionary<string, string>();
+        result.Add("office", menu[0]);
+        result.Add("my-computers", menu[1]);
+        result.Add("settings", menu[2]);
+        result.Add("about-us", menu[3]);
+        return result;
+    }
+*/
 }

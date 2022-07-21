@@ -7,7 +7,7 @@ using bot.Data;
 
 #nullable disable
 
-namespace bot.Data.Migrations
+namespace bot.Migrations
 {
     [DbContext(typeof(BotDbContext))]
     partial class BotDbContextModelSnapshot : ModelSnapshot
@@ -34,7 +34,7 @@ namespace bot.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ChoosenApps");
+                    b.ToTable("ChosenApps");
                 });
 
             modelBuilder.Entity("bot.Entity.Kompyuter", b =>
@@ -98,7 +98,7 @@ namespace bot.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Progs");
+                    b.ToTable("Prog");
                 });
 
             modelBuilder.Entity("bot.Entity.User", b =>

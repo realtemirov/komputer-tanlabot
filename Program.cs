@@ -17,7 +17,8 @@ builder.Services.AddSingleton<IUpdateHandler, BotUpdateHandler>();
 builder.Services.AddHostedService<BotBackgroundService>();
 
 builder.Services.AddScoped<UserService>();
-//qarang koring grafigichni cizing 
+builder.Services.AddScoped<ChosenAppService>();
+builder.Services.AddScoped<ProgService>();
 
 builder.Services.AddLocalization();
 

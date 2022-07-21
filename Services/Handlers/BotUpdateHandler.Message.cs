@@ -10,7 +10,7 @@ namespace bot.Services;
 
 public partial class BotUpdateHandler
 {
-    private async Task HandleMessageAsync(ITelegramBotClient client, Message? message, CancellationToken token)
+    private async Task HandleMessageAsync(ITelegramBotClient client, Message message, CancellationToken token)
     {
         ArgumentNullException.ThrowIfNull(message);
 
@@ -41,7 +41,6 @@ public partial class BotUpdateHandler
         var handler = message.Text switch
         {
             "/start" => HandleStartAsync(client, message, token),
-            "O'zbekcha" or "Русский" or "English" => HandleLanguageAsync(client, message, token),
             _ => Task.CompletedTask
         };
         
@@ -49,15 +48,14 @@ public partial class BotUpdateHandler
         
     }
 
-
-    // til tanlanganda
-    private async Task HandleLanguageAsync(ITelegramBotClient client, Message message, CancellationToken token)
+    private async Task HandleLanguageAsync(ITelegramBotClient client, CallbackQuery query, CancellationToken token)
     {
-        var cultureString = StringConstants.LanguageNames.FirstOrDefault(v => v.Value == message.Text).Key;
-        
-        await _userService.UpdateLanguageCodeAsync(message.From.Id, cultureString);
-
-        await client.DeleteMessageAsync(message.Chat.Id, message.MessageId, token);
+        var message = query.Message;
+        var cultureString = StringConstants.LanguageNames.FirstOrDefault(v => v.Key == query.Data).Key;
+        _logger.LogInformation("user {message.From.Id}", message?.From?.Id);
+        var reesss = await _userService.UpdateLanguageCodeAsync(message?.From?.Id, cultureString);
+        _logger.LogInformation("set lang {reesss.ErrorMessage} {ciultureString}",reesss.ErrorMessage,cultureString);
+        await client.DeleteMessageAsync(message?.Chat?.Id, message.MessageId, token);
 
         await client.SendChatActionAsync(message.Chat.Id, ChatAction.UploadPhoto, token);
 
@@ -72,19 +70,27 @@ public partial class BotUpdateHandler
             message.Chat.Id,
             photo: stream,
             caption: _localizer["ourservice", message.From?.FirstName ?? "👻 Something went wrong"],
-            replyMarkup: MarkupHelpers.GetInlineKeyboardMatrix(StringConstants.Programers,3),
+            replyMarkup: MarkupHelpers.GetInlineKeyboardMatrix(
+                StringConstants.Menu),
             cancellationToken: token);
     }
 
     // start bosilganda
     private async Task HandleStartAsync(ITelegramBotClient client, Message message, CancellationToken token)
     {
+
         var from = message.From;
         
-        await client.SendTextMessageAsync(
+        var root = Directory.GetCurrentDirectory();
+        var filePath = Path.Combine(root, "main.jpg");
+        var bytes = await System.IO.File.ReadAllBytesAsync(filePath, token);
+        using var stream = new MemoryStream(bytes);
+        await client.DeleteMessageAsync(message.Chat.Id, message.MessageId, token);
+        await client.SendPhotoAsync(
                             chatId: message.Chat.Id,
-                            text: _localizer["greeting", from?.FirstName ?? "👻"],
-                            replyMarkup: MarkupHelpers.GetReplyKeyboardMarkup(StringConstants.LanguageNames.Values.ToArray(), 3),
+                            photo: stream,
+                            caption: _localizer["greeting", from?.FirstName ?? "👻"],
+                            replyMarkup: MarkupHelpers.GetInlineKeyboardMatrix(StringConstants.LanguageNames,3),
                             parseMode: ParseMode.Html,
                             cancellationToken: token);
     }

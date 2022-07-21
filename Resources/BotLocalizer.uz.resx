@@ -125,4 +125,8 @@
     <value>💻 Kerakli dasturlarni tanlab sizga qanday komputer mosligini bilib olishingiz mumkin</value>
     <comment/>
   </data>
+  <data name="menu" xml:space="preserve">
+    <value>Komputer tanlash|Mening komputerlarim|Sozlamalar|Kontakt</value>
+    <comment/>
+  </data>
 </root>

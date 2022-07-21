@@ -9,5 +9,5 @@ public class ChosenApp
     public Guid? ProgId { get; set; }
 
     public DateTimeOffset ChosenTime { get; set; }
-    
+
 }

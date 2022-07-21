@@ -14,6 +14,9 @@ public partial class BotUpdateHandler : IUpdateHandler
     private readonly IServiceScopeFactory _scopeFactory;
     private IStringLocalizer _localizer;
     private UserService _userService;
+    private ChosenAppService _chosenAppService;
+    private ProgService _progService;
+
 
     public BotUpdateHandler(
         ILogger<BotUpdateHandler> logger,
@@ -36,6 +39,9 @@ public partial class BotUpdateHandler : IUpdateHandler
         using var scope = _scopeFactory.CreateScope();
 
         _userService = scope.ServiceProvider.GetRequiredService<UserService>();
+        _chosenAppService = scope.ServiceProvider.GetRequiredService<ChosenAppService>();
+        _progService = scope.ServiceProvider.GetRequiredService<ProgService>();
+        
 
         var culture = await GetCultureForUser(update);
         CultureInfo.CurrentCulture = culture;
@@ -62,9 +68,9 @@ public partial class BotUpdateHandler : IUpdateHandler
         }
     }
 
-    private async Task<CultureInfo> GetCultureForUser(Update? update)
+    private async Task<CultureInfo> GetCultureForUser(Update update)
     {
-        User? from = update.Type switch
+        User from = update.Type switch
         {
             UpdateType.Message => update?.Message?.From,
             UpdateType.EditedMessage => update?.EditedMessage?.From,
@@ -97,8 +103,7 @@ public partial class BotUpdateHandler : IUpdateHandler
             _logger.LogInformation("User not added: {from.Id}, {result.ErrorMessage}");
         }
 
-        var language = await _userService.GetLanguageCodeAsync(from?.Id);
-
+        var language = await _userService.GetLanguageCodeAsync(from.Id);
         _logger.LogInformation($"Language set to: {language}");
         
         return new CultureInfo(language ?? "uz-Uz");

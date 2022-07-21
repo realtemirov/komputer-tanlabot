@@ -1,0 +1,1 @@
+SELECT COUNT(*) AS Soni FROM Prog;

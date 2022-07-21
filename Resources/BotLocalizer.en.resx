@@ -125,4 +125,8 @@
     <value>💻 You can find out what kind of computer is right for you by choosing the right programs</value>
     <comment/>
   </data>
+  <data name="menu" xml:space="preserve">
+    <value>Choosing a computer|My computers|Settings|Contact</value>
+    <comment/>
+  </data>
 </root>
