@@ -14,10 +14,12 @@ public partial class BotUpdateHandler
         var from = query.From;
 
         _logger.LogInformation("Received CallbackQuery from {from.Firstname}: {query.Data}", from?.FirstName, query.Data);
-
+        
         var handler = query.Data switch
         {
+            "uz-Uz" or "ru-Ru" or "en-Us" => HandleLanguageAsync(client, query, token),
             "office" => OfficeAsync(client, query.Message, token),
+            "office-msword" => OfficeWordAsync(client, query, token),
             "menu" => HandleMenu(client,query.Message,token),
             _ => Task.CompletedTask
         };

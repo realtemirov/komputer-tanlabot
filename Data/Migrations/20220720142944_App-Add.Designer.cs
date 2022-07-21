@@ -11,13 +11,53 @@ using bot.Data;
 namespace bot.Data.Migrations
 {
     [DbContext(typeof(BotDbContext))]
-    [Migration("20220706140727_Initial")]
-    partial class Initial
+    [Migration("20220720142944_App-Add")]
+    partial class AppAdd
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.6");
+
+            modelBuilder.Entity("bot.Entity.ChosenApp", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTimeOffset>("ChosenTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("ProgId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<long>("UserId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ChoosenApps");
+                });
+
+            modelBuilder.Entity("bot.Entity.Prog", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Point")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ProgType")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Prog");
+                });
 
             modelBuilder.Entity("bot.Entity.User", b =>
                 {

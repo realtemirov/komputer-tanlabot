@@ -18,7 +18,7 @@ public class UserService
     }
 
     //add user
-    public async Task<(bool IsSuccess, string? ErrorMessage)> AddUserAsync(User user)
+    public async Task<(bool IsSuccess, string ErrorMessage)> AddUserAsync(User user)
     {
         if(await Exists(user.UserId))
             return (false, "User exists");
@@ -37,7 +37,7 @@ public class UserService
     }
 
     //get user from db
-    public async Task<User?> GetUserAsync(long? userId)
+    public async Task<User> GetUserAsync(long userId)
     {
         ArgumentNullException.ThrowIfNull(userId);
         ArgumentNullException.ThrowIfNull(_context.Users);
@@ -47,7 +47,7 @@ public class UserService
 
 
     //userni languagesini update qilish
-    public async Task<(bool IsSuccess, string? ErrorMessage)> UpdateLanguageCodeAsync(long? userId, string? languageCode)
+    public async Task<(bool IsSuccess, string ErrorMessage)> UpdateLanguageCodeAsync(long userId, string languageCode)
     {
         ArgumentNullException.ThrowIfNull(languageCode);
 
@@ -60,14 +60,15 @@ public class UserService
 
         user.LanguageCode = languageCode;
         _context?.Users?.Update(user);
+        
         await _context.SaveChangesAsync();
 
-        return (true, null);
+        return (true, "set langeuage");
     }
 
 
     //get user's language code from db
-    public async Task<string?> GetLanguageCodeAsync(long? userId)
+    public async Task<string> GetLanguageCodeAsync(long userId)
     {
         var user = await GetUserAsync(userId);
 

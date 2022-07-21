@@ -5,7 +5,7 @@ namespace bot.Services;
 
 public partial class BotUpdateHandler
 {
-    private async Task HandleEditMessageAsync(ITelegramBotClient client, Message? message, CancellationToken token)
+    private async Task HandleEditMessageAsync(ITelegramBotClient client, Message message, CancellationToken token)
     {
         ArgumentNullException.ThrowIfNull(message);
 
