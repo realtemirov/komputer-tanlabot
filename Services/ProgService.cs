@@ -45,15 +45,6 @@ public class ProgService
         return await _context.Prog.FindAsync(query);
     }
 
-    public async Task<User> GetUserAsync(long? userId)
-    {
-        ArgumentNullException.ThrowIfNull(userId);
-        ArgumentNullException.ThrowIfNull(_context.Users);
-
-        return await _context.Users.FindAsync(userId);
-    }
-
-
     public async Task<bool> Exists(string query)
         => await _context.Prog.AnyAsync(p => p.Query == query);
 }

@@ -52,9 +52,9 @@ public partial class BotUpdateHandler
     {
         var message = query.Message;
         var cultureString = StringConstants.LanguageNames.FirstOrDefault(v => v.Key == query.Data).Key;
-        
-        await _userService.UpdateLanguageCodeAsync(message.From.Id, cultureString);
-        _logger.LogInformation("set lang {0} ",cultureString);
+        _logger.LogInformation("user {message.From.Id}", message.From.Id);
+        var reesss = await _userService.UpdateLanguageCodeAsync(message.From.Id, cultureString);
+        _logger.LogInformation("set lang {reesss.ErrorMessage} {ciultureString}",reesss.ErrorMessage,cultureString);
         await client.DeleteMessageAsync(message.Chat.Id, message.MessageId, token);
 
         await client.SendChatActionAsync(message.Chat.Id, ChatAction.UploadPhoto, token);

@@ -1,1 +1,1 @@
-Select * From Users;
+SELECT COUNT(*) AS Soni FROM Prog;
