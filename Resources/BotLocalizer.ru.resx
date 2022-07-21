@@ -129,4 +129,12 @@
     <value>Выбор компьютера|Мои компьютеры|Настройки|Контакт</value>
     <comment/>
   </data>
+  <data name="progs" xml:space="preserve">
+    <value>Офисные программы|Графический дизайн|Видеоредакторы|Среды программирования|Браузеры|Социальные сети|Игры</value>
+    <comment/>
+  </data>
+  <data name="computer" xml:space="preserve">
+    <value>Kerakli dasturni tanlang Russian</value>
+    <comment/>
+  </data>
 </root>

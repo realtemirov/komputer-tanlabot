@@ -129,4 +129,12 @@
     <value>Choosing a computer|My computers|Settings|Contact</value>
     <comment/>
   </data>
+  <data name="progs" xml:space="preserve">
+    <value>Office programs|Graphic design|Video Editors|Programming environments|Browsers|Social networks|Games</value>
+    <comment/>
+  </data>
+  <data name="computer" xml:space="preserve">
+    <value>Kerakli dasturni tanlang English</value>
+    <comment/>
+  </data>
 </root>

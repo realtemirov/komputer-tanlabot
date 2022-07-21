@@ -12,17 +12,24 @@ namespace bot.Services;
 
 public partial class BotUpdateHandler
 {
-    private async Task MenuAsync(ITelegramBotClient client, CallbackQuery query, CancellationToken token)
+
+    private async Task HandleMenu(ITelegramBotClient client, CallbackQuery query, CancellationToken token)
     {
         var message = query.Message;
+        var root = Directory.GetCurrentDirectory();
+        var filePath = Path.Combine(root, "main.jpg");
 
-        var from = message.From;
+        var bytes = await System.IO.File.ReadAllBytesAsync(filePath, token);
+
+        using var stream = new MemoryStream(bytes);
+
+        await client.SendPhotoAsync(
+            message.Chat.Id,
+            photo: stream,
+            caption: _localizer["ourservice", message.From?.FirstName ?? "👻 Something went wrong"],
+            replyMarkup: MarkupHelpers.GetInlineKeyboardMatrix(
+                StringConstants.MenuResxToDictionary(_localizer["menu"].ToString().Split('|'))),
+            cancellationToken: token);
         
-        await client.EditMessageCaptionAsync(
-                            chatId: message.Chat.Id,
-                            messageId: message.MessageId,
-                            caption: "Kerakli dasturni tanlang: ",
-                            replyMarkup: MarkupHelpers.GetInlineKeyboardMatrix(StringConstants.Programers, 3),
-                            cancellationToken: token);
     }
 }

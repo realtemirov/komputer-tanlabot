@@ -12,9 +12,9 @@ namespace bot.Services;
 
 public partial class BotUpdateHandler
 {
-    
-    private async Task OfficeAsync(ITelegramBotClient client, Message message, CancellationToken token)
+    private async Task OfficeAsync(ITelegramBotClient client, CallbackQuery query, CancellationToken token)
     {
+        var message = query.Message;
         var from = message.From;
         
         await client.EditMessageCaptionAsync(
@@ -23,22 +23,5 @@ public partial class BotUpdateHandler
                             caption: "📁 Office dasturlardan ishlatadiganlaringizni tanlang: ",
                             replyMarkup:MarkupHelpers.GetInlineKeyboardMatrix(StringConstants.OfficePrograms,3),
                             cancellationToken: token);
-
-
-    }
-
-    private async Task OfficeWordAsync(ITelegramBotClient client, CallbackQuery message, CancellationToken token)
-    {
-        var from = message.From;
-
-        /*var result1 = await _chosenAppService.AddChosenAppAsync(new ChosenApp()
-        {
-            Id = Guid.NewGuid(),
-            UserId = from.Id,
-            ProgId = await _progService.GetProgAsync(message.Data).
-            ChosenTime = DateTimeOffset.Now,
-        });*/
-        _logger.LogInformation("Hello");
-    }
-    
+    }    
 }

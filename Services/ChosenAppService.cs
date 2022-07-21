@@ -20,7 +20,7 @@ public class ChosenAppService
 
         try
         {
-            var result = await _context.ChosenApps.AddAsync(chosenApp);
+            var result = await _context.ChoosenApps.AddAsync(chosenApp);
             await _context.SaveChangesAsync();
 
             return (true, "Add chosenApp");
@@ -35,11 +35,11 @@ public class ChosenAppService
     public async Task<ChosenApp> GetChosenAppAsync(Guid id)
     {
         ArgumentNullException.ThrowIfNull(id);
-        ArgumentNullException.ThrowIfNull(_context.Prog);
+        ArgumentNullException.ThrowIfNull(_context.ChoosenApps);
 
-        return await _context.ChosenApps.FindAsync(id);
+        return await _context.ChoosenApps.FindAsync(id);
     }
 
     public async Task<bool> Exists(Guid id)
-        => await _context.ChosenApps.AnyAsync(p => p.Id == id);
+        => await _context.ChoosenApps.AnyAsync(p => p.Id == id);
 }

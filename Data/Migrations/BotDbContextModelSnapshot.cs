@@ -2,7 +2,6 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using bot.Data;
 
@@ -11,10 +10,9 @@ using bot.Data;
 namespace bot.Migrations
 {
     [DbContext(typeof(BotDbContext))]
-    [Migration("20220720180819_bug fixed")]
-    partial class bugfixed
+    partial class BotDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.6");
@@ -36,7 +34,48 @@ namespace bot.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ChosenApps");
+                    b.ToTable("ChoosenApps");
+                });
+
+            modelBuilder.Entity("bot.Entity.Kompyuter", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("GPU")
+                        .HasColumnType("TEXT");
+
+                    b.Property<double>("Grade")
+                        .HasColumnType("REAL");
+
+                    b.Property<string>("LinkOfPic")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ModelName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("OS")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Price")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Processor")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("RAM")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ScreenSize")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Storage")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Kompyuters");
                 });
 
             modelBuilder.Entity("bot.Entity.Prog", b =>
@@ -59,7 +98,7 @@ namespace bot.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Prog");
+                    b.ToTable("Progs");
                 });
 
             modelBuilder.Entity("bot.Entity.User", b =>
