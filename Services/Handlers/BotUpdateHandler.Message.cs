@@ -61,6 +61,7 @@ public partial class BotUpdateHandler
         await client.DeleteMessageAsync(message.Chat.Id, message.MessageId, token);
 
         await client.SendChatActionAsync(message.Chat.Id, ChatAction.UploadPhoto, token);
+        
         await HandleMenu(client, message, token);
     }
 
