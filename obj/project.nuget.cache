@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "j9fXnzOclWqmOqdGEyfaWGhATDb6Vhrw5BxTi97hB4Ug8TsIjcaaEUWla7Gt/zvBhTPfCcIGL2oonNNT8wQifA==",
+  "dgSpecHash": "pJbqUF8FL8Xik0noyEEPp68I+52ncyzzf6dfCcfJNQ60ywl8qQvv8ty3xUEbLv/4kle4lQWSfeFewf5EsOEwZQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\temir\\Downloads\\net-bootcamp-002-main\\05-07\\comp_bot\\bot.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\temir\\.nuget\\packages\\convertapi\\3.0.7\\convertapi.3.0.7.nupkg.sha512",
     "C:\\Users\\temir\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\temir\\.nuget\\packages\\microsoft.data.sqlite.core\\6.0.6\\microsoft.data.sqlite.core.6.0.6.nupkg.sha512",
     "C:\\Users\\temir\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.6\\microsoft.entityframeworkcore.6.0.6.nupkg.sha512",

@@ -53,32 +53,42 @@ public partial class BotUpdateHandler
     {
         var message = query.Message;
 
-
+        
         var cultureString = StringConstants.LanguageNames.FirstOrDefault(v => v.Key == query.Data).Key;
         
         var reesss = await _userService.UpdateLanguageCodeAsync(message?.Chat?.Id, cultureString);
         
-        await client.DeleteMessageAsync(message?.Chat?.Id, message.MessageId, token);
+        await client.DeleteMessageAsync(message.Chat.Id, message.MessageId, token);
 
         await client.SendChatActionAsync(message.Chat.Id, ChatAction.UploadPhoto, token);
-        await HandleMenu(client, query, token);
+        await HandleMenu(client, message, token);
     }
 
     private async Task HandleStartAsync(ITelegramBotClient client, Message message, CancellationToken token)
     {
+
         var from = message.From;
-        
-        var root = Directory.GetCurrentDirectory();
-        var filePath = Path.Combine(root, "main.jpg");
-        var bytes = await System.IO.File.ReadAllBytesAsync(filePath, token);
-        using var stream = new MemoryStream(bytes);
+        var user = _userService.Exists(from.Id).Result;
         await client.DeleteMessageAsync(message.Chat.Id, message.MessageId, token);
-        await client.SendPhotoAsync(
+        _logger.LogInformation(user.ToString());
+        if(!user)
+        {
+            var root = Directory.GetCurrentDirectory();
+            var filePath = Path.Combine(root, "main.jpg");
+            var bytes = await System.IO.File.ReadAllBytesAsync(filePath, token);
+            using var stream = new MemoryStream(bytes);
+            await client.SendPhotoAsync(
                             chatId: message.Chat.Id,
                             photo: stream,
                             caption: _localizer["greeting", from?.FirstName ?? "👻"],
                             replyMarkup: MarkupHelpers.GetInlineKeyboardMatrix(StringConstants.LanguageNames,3),
                             parseMode: ParseMode.Html,
                             cancellationToken: token);
+        }
+        else
+        {
+            HandleMenu(client, message, token);
+        }
+        
     }
 }

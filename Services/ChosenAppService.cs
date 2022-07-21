@@ -13,14 +13,20 @@ public class ChosenAppService
         _context = context ?? throw new ArgumentNullException(nameof(context));
     }
 
+
+    public async Task<List<ChosenApp>> GetAllChosenAppAsync()
+    {
+        return  _context.ChosenApps.ToList();
+    }
+
     public async Task<(bool IsSuccess, string ErrorMessage)> AddChosenAppAsync(ChosenApp chosenApp)
     {
-        if (await Exists(chosenApp.Id))
+        if (await Exists(chosenApp.ProgId))
             return (false, "ChosenApp exists");
 
         try
         {
-            var result = await _context.ChoosenApps.AddAsync(chosenApp);
+            var result = await _context.ChosenApps.AddAsync(chosenApp);
             await _context.SaveChangesAsync();
 
             return (true, "Add chosenApp");
@@ -31,15 +37,25 @@ public class ChosenAppService
         }
     }
 
+    public async Task DeleteChosenAppAsync(long userId)
+    {
+        var app = _context.ChosenApps.Where(x => x.UserId == userId);
+
+        foreach (var item in app)
+        {
+            _context.ChosenApps.Remove(item);
+        }
+        await _context.SaveChangesAsync();
+    }
     
     public async Task<ChosenApp> GetChosenAppAsync(Guid id)
     {
         ArgumentNullException.ThrowIfNull(id);
-        ArgumentNullException.ThrowIfNull(_context.ChoosenApps);
+        ArgumentNullException.ThrowIfNull(_context.ChosenApps);
 
-        return await _context.ChoosenApps.FindAsync(id);
+        return await _context.ChosenApps.FindAsync(id);
     }
 
-    public async Task<bool> Exists(Guid id)
-        => await _context.ChoosenApps.AnyAsync(p => p.Id == id);
+    public async Task<bool> Exists(Guid? id)
+        => await _context.ChosenApps.AnyAsync(p => p.ProgId == id);
 }

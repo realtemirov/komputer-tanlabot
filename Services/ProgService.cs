@@ -13,17 +13,16 @@ public class ProgService
         _context = context ?? throw new ArgumentNullException(nameof(context));
     }
 
+    public async Task<List<Prog>> GetAllProgsAsync()
+    {
+        return  _context.Progs.ToList();
+    }
+
     public async Task<(bool IsSuccess, string ErrorMessage)> AddProgAsync(Prog prog)
     {
             if(await Exists(prog.Query))
             {
-                if(_context.Progs.Count(x => x.Query == prog.Query)> 1)
-                {
-                    _context.Remove(_context.Progs.FirstOrDefault(x => x.Query == prog.Query));
-                    _context.SaveChanges();
-                }
-                return (false, "Prog exists");
-                
+                return (false, "Prog exists");   
             }
             try
             {
@@ -38,13 +37,16 @@ public class ProgService
     }
 
     
-    public async Task<Prog> GetProgAsync(string query)
+    public async Task<Prog?> GetProgAsync(string query)
     {
         ArgumentNullException.ThrowIfNull(query);
         ArgumentNullException.ThrowIfNull(_context.Progs);
-        return await _context.Progs.FindAsync(query);
+        var prog = _context.Progs.FirstOrDefaultAsync(p => p.Query == query).Result;
+        return prog;
     }
 
     public async Task<bool> Exists(string query)
         => await _context.Progs.AnyAsync(p => p.Query == query);
+
+    
 }

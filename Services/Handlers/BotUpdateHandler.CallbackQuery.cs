@@ -15,13 +15,15 @@ public partial class BotUpdateHandler
         var from = query.From;
 
         _logger.LogInformation("Received CallbackQuery from {from.Firstname}: {query.Data}", from?.FirstName, query.Data);
-        var querySplit = query.Data.Split('-');
-        var handler = querySplit[0] switch
+        
+        var handler = query.Data switch
         {
-            "uz" or "ru" or "en" => HandleLanguageAsync(client, query, token),
+            "uz-Uz" or "ru-Ru" or "en-Us" => HandleLanguageAsync(client, query, token),
             "computer" => ComputerAsync(client, query, token),
-            "menu" => HandleMenu(client,query,token),
-            _ => Task.CompletedTask
+            "office" or "graph" or "videomaker" or "ide" or "browser" or "social" or "game" => ProgsAsync(client, query, token),
+            "menu" => HandleMenu(client,query.Message,token),
+            "ready" => ReadyAsync(client, query, token),
+            _ => NoteSelectAsync(client, query, token)
         };
 
         await handler;
