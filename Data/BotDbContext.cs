@@ -11,6 +11,8 @@ public class BotDbContext : DbContext
 
     public DbSet<ChosenApp> ChosenApps { get; set; }
 
-    public BotDbContext(DbContextOptions<BotDbContext> options)
+    public DbSet<Kompyuter>? Kompyuters {get;set;}
+
+     public BotDbContext(DbContextOptions<BotDbContext> options)
         : base(options) { }
 }

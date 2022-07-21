@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "XwQ72DYO5oVR0UBakA2da33qH3GCNuVpO2kqdTaHi13+Fmaq4BWb+EA1lJNpd0+7Qhb0BThPgnhNj1/kGhj93A==",
+  "dgSpecHash": "j9fXnzOclWqmOqdGEyfaWGhATDb6Vhrw5BxTi97hB4Ug8TsIjcaaEUWla7Gt/zvBhTPfCcIGL2oonNNT8wQifA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\temir\\Downloads\\net-bootcamp-002-main\\05-07\\bot\\bot.csproj",
+  "projectFilePath": "C:\\Users\\temir\\Downloads\\net-bootcamp-002-main\\05-07\\comp_bot\\bot.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\temir\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\temir\\.nuget\\packages\\microsoft.data.sqlite.core\\6.0.6\\microsoft.data.sqlite.core.6.0.6.nupkg.sha512",

@@ -105,6 +105,7 @@ public partial class BotUpdateHandler : IUpdateHandler
 
         var language = await _userService.GetLanguageCodeAsync(from.Id);
         _logger.LogInformation($"Language set to: {language}");
+        
         return new CultureInfo(language ?? "uz-Uz");
     }
 
