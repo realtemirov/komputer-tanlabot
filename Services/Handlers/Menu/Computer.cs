@@ -50,12 +50,30 @@ public partial class BotUpdateHandler
         var user = query.Message.Chat;
         var allChosenApp = _chosenAppService.GetAllChosenAppAsync().Result.Where(c => c.UserId == user.Id).Select( p=> p.ProgId ).ToList();
         
-        var maxPoint = _progService.GetAllProgsAsync().Result.Where(p => allChosenApp.Contains(p.Id)).Max(p => p.Point);
+        if(allChosenApp.Count < 1  )
+        {
+            _logger.LogInformation("NULL");
+            await AlertAsync(client, query, token, "Hali dasturlarni tanlamadingir");
+            await client.EditMessageCaptionAsync(user.Id, query.Message.MessageId,
+            caption: _localizer["ourservice"],
+            replyMarkup: MarkupHelpers.GetInlineKeyboardMatrix(
+                StringConstants.MenuResxToDictionary(_localizer["menu"].ToString().Split('|'))),
+            cancellationToken: token);
+        
+            return;
+        }
+        _logger.LogInformation(" Chosen app NOT NULL");
+
+        var progss = _progService.GetAllProgsAsync().Result.Where(p => allChosenApp.Contains(p.Id));
+        
+        var maxPoint = progss.Max(p => p.Point);
+        
+        _logger.LogInformation(" progss NOT NULL");
 
         var myComps = _computerService.GetAllCompsAsync().Result.Where(c => c.Grade >= maxPoint).OrderBy(c => c.Price).ToList();
 
         var guid = Guid.NewGuid().ToString();
-
+        await _computerService.DeleteMyComps(user.Id);
         foreach (var item in myComps)
         {
             var resultAddComp = _computerService.AddMyKompAsync( new MyComputer
@@ -71,8 +89,9 @@ public partial class BotUpdateHandler
         await _chosenAppService.DeleteChosenAppAsync(user.Id);
 
 
-        AlertAsync(client, query, token,"Ma'lumotlaringiz yuborildi");
+        AlertAsync(client, query, token,"Ma'lumotlaringiz yuborildi. Tez orada yetib boradi");
 
+        _logger.LogInformation("Convert File");
         await client.DeleteMessageAsync(user.Id, query.Message.MessageId, token);
         await CompToText(myComps);
 
@@ -81,6 +100,7 @@ public partial class BotUpdateHandler
         {
             await client.SendDocumentAsync(user.Id, new InputOnlineFile(stream,$"{user.FirstName}ning komputerlari.pdf"), cancellationToken: token);                
         }
+        _logger.LogInformation("File Send");
     }
 
     private async Task ShowComputersAsync(ITelegramBotClient client, CallbackQuery query, CancellationToken token)
@@ -106,7 +126,6 @@ public partial class BotUpdateHandler
                                 }),
                             cancellationToken: token);
     }
-
 
     private async Task NoteSelectAsync(ITelegramBotClient client, CallbackQuery query, CancellationToken token)
     {
@@ -177,5 +196,18 @@ public partial class BotUpdateHandler
         System.IO.File.WriteAllText("text.txt",sb.ToString());
         
         await bot.Helpers.Convert.ConvertTxtToPdf();
+    }
+
+    private async Task ProgsAsync(ITelegramBotClient client, CallbackQuery query, CancellationToken token)
+    {
+        var message = query.Message;
+        var from = message.From;
+        
+        await client.EditMessageCaptionAsync(
+                            chatId: message.Chat.Id,
+                            messageId: message.MessageId,
+                            caption: _localizer["office"],
+                            replyMarkup:MarkupHelpers.GetInlineKeyboardMatrix(await GetFromDbAsync(query.Data.ToString()),3),
+                            cancellationToken: token);
     }
 }

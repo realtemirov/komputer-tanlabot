@@ -13,7 +13,16 @@ public class ComputerService
         _context = context ?? throw new ArgumentNullException(nameof(context));
     }
 
-    
+    public async Task DeleteMyComps(long userId)
+    {
+        var comps = await _context.MyComputers.Where(c => c.UserId == userId).ToListAsync();
+        foreach (var item in comps)
+        {
+            _context.MyComputers.Remove(item);
+        }
+        _context.SaveChangesAsync();
+
+    }
     public async Task<List<Kompyuter>> GetAllCompsAsync()
     {
         return  _context.Kompyuters.ToList();

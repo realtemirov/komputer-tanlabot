@@ -22,6 +22,9 @@ public partial class BotUpdateHandler
             "computer" => ComputerAsync(client, query, token),
             "office" or "graph" or "videomaker" or "ide" or "browser" or "social" or "game" => ProgsAsync(client, query, token),
             "menu" => HandleMenu(client,query.Message,token),
+            "my-computers" => HandleMyComp(client,query,token),
+            "settings" => HandleSetting(client,query,token),
+            "about-us" => AlertAsync(client,query,token,"©️ IlmHubTeam 2022\n@ilmhubuz"),
             "ready" => ReadyAsync(client, query, token),
             _ => NoteSelectAsync(client, query, token)
         };
