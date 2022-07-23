@@ -5,15 +5,15 @@ namespace bot.Helpers;
 
 public static class Convert
 {
-    public static async Task ConvertTxtToPdf()
+    public static async Task ConvertTxtToPdf(long userId)
     {       
         ConvertApi convertApi = new ConvertApi("BdqUk2GXnWRXdP78");
         ConvertApiResponse result = await convertApi.ConvertAsync("txt", "pdf", new[]
         {
-        new ConvertApiFileParam("text.txt")
+            new ConvertApiFileParam($"{userId}.txt")
         });
 
         
-        var fileInfo = await result.SaveFileAsync("computer.pdf");
+        var fileInfo = await result.SaveFileAsync($"{userId}.pdf");
     }
 }
