@@ -95,7 +95,7 @@ public partial class BotUpdateHandler
         await CompToText(myComps,user.Id);
 
         await HandleMenu(client, query.Message, token);
-        using(var stream = new FileStream("computer.pdf",FileMode.Open))
+        using(var stream = new FileStream($"{user.Id}.pdf",FileMode.Open))
         {
             await client.SendDocumentAsync(user.Id, new InputOnlineFile(stream,$"{user.FirstName}ning komputerlari.pdf"), cancellationToken: token);                
         }
