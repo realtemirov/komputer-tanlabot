@@ -1,5 +1,7 @@
+using System.Globalization;
 using System.Web;
 using bot.Constants;
+using bot.Entity;
 using bot.Helpers;
 using Telegram.Bot;
 using Telegram.Bot.Types;
@@ -10,7 +12,7 @@ namespace bot.Services;
 
 public partial class BotUpdateHandler
 {
-    private async Task HandleMessageAsync(ITelegramBotClient client, Message? message, CancellationToken token)
+    private async Task HandleMessageAsync(ITelegramBotClient client, Message message, CancellationToken token)
     {
         ArgumentNullException.ThrowIfNull(message);
 
@@ -24,7 +26,7 @@ public partial class BotUpdateHandler
         };
         
         await handler;
-    }
+        }
 
     private Task HandleUnknownMessageAsync(ITelegramBotClient client, Message message, CancellationToken token)
     {
@@ -41,7 +43,6 @@ public partial class BotUpdateHandler
         var handler = message.Text switch
         {
             "/start" => HandleStartAsync(client, message, token),
-            "O'zbekcha" or "Русский" or "English" => HandleLanguageAsync(client, message, token),
             _ => Task.CompletedTask
         };
         
@@ -49,43 +50,79 @@ public partial class BotUpdateHandler
         
     }
 
-
-    // til tanlanganda
-    private async Task HandleLanguageAsync(ITelegramBotClient client, Message message, CancellationToken token)
+    private async Task HandleLanguageAsync(ITelegramBotClient client, CallbackQuery query, CancellationToken token)
     {
-        var cultureString = StringConstants.LanguageNames.FirstOrDefault(v => v.Value == message.Text).Key;
-        
-        await _userService.UpdateLanguageCodeAsync(message.From.Id, cultureString);
+        var message = query.Message;
 
+        
+        var cultureString = StringConstants.LanguageNames.FirstOrDefault(v => v.Key == query.Data).Key;
+        
+        var reesss = await _userService.UpdateLanguageCodeAsync(message?.Chat?.Id, cultureString);
+
+        CultureInfo.CurrentCulture = new CultureInfo(cultureString);
+        CultureInfo.CurrentUICulture = new CultureInfo(cultureString);
+        
         await client.DeleteMessageAsync(message.Chat.Id, message.MessageId, token);
 
         await client.SendChatActionAsync(message.Chat.Id, ChatAction.UploadPhoto, token);
-
-        var root = Directory.GetCurrentDirectory();
-        var filePath = Path.Combine(root, "main.jpg");
-
-        var bytes = await System.IO.File.ReadAllBytesAsync(filePath, token);
-
-        using var stream = new MemoryStream(bytes);
-
-        await client.SendPhotoAsync(
-            message.Chat.Id,
-            photo: stream,
-            caption: _localizer["ourservice", message.From?.FirstName ?? "👻 Something went wrong"],
-            replyMarkup: MarkupHelpers.GetInlineKeyboardMatrix(StringConstants.Programers,3),
-            cancellationToken: token);
+        
+        await HandleMenu(client, message, token);
     }
 
-    // start bosilganda
     private async Task HandleStartAsync(ITelegramBotClient client, Message message, CancellationToken token)
     {
+
         var from = message.From;
-        
-        await client.SendTextMessageAsync(
+        var user = _userService.Exists(from.Id).Result;
+        await client.DeleteMessageAsync(message.Chat.Id, message.MessageId, token);
+        _logger.LogInformation(user.ToString());
+        _logger.LogInformation("Tilni tanladi");
+        if(!user)
+        {
+            var root = Directory.GetCurrentDirectory();
+            var filePath = Path.Combine(root, "main.jpg");
+            var bytes = await System.IO.File.ReadAllBytesAsync(filePath, token);
+            using var stream = new MemoryStream(bytes);
+            await client.SendPhotoAsync(
                             chatId: message.Chat.Id,
-                            text: _localizer["greeting", from?.FirstName ?? "👻"],
-                            replyMarkup: MarkupHelpers.GetReplyKeyboardMarkup(StringConstants.LanguageNames.Values.ToArray(), 3),
+                            photo: stream,
+                            caption: _localizer["greeting", from?.FirstName ?? "👻"],
+                            replyMarkup: MarkupHelpers.GetInlineKeyboardMatrix(StringConstants.LanguageNames,3),
                             parseMode: ParseMode.Html,
                             cancellationToken: token);
+            await CreateUser(client,message,token);
+        }
+        else
+        {
+            HandleMenu(client, message, token);
+        }
+        
+    }
+
+    private async Task CreateUser(ITelegramBotClient client, Message message, CancellationToken token)
+    {
+        var from = message.From;
+        var result = await _userService.AddUserAsync(new Entity.User()
+        {
+            FirstName = from.FirstName,
+            LastName = from.LastName,
+            // ChatId = ( update.Message == null ? update.CallbackQuery.Message.Chat.Id:update.Message.Chat.Id),
+            IsBot = from.IsBot,
+            UserId = from.Id,
+            Username = from.Username,
+            LanguageCode = from.LanguageCode,
+            CreatedAt = DateTimeOffset.UtcNow,
+            LastInteractionAt = DateTimeOffset.UtcNow
+        });
+
+
+        if(result.IsSuccess)
+        {
+            _logger.LogInformation("New user added: {from.Id}");
+        }
+        else
+        {
+            _logger.LogInformation("User not added: {from.Id}, {result.ErrorMessage}");
+        }
     }
 }

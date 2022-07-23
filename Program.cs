@@ -17,7 +17,9 @@ builder.Services.AddSingleton<IUpdateHandler, BotUpdateHandler>();
 builder.Services.AddHostedService<BotBackgroundService>();
 
 builder.Services.AddScoped<UserService>();
-//qarang koring grafigichni cizing 
+builder.Services.AddScoped<ChosenAppService>();
+builder.Services.AddScoped<ProgService>();
+builder.Services.AddScoped<ComputerService>();
 
 builder.Services.AddLocalization();
 
@@ -32,5 +34,4 @@ var localizationOptions = new RequestLocalizationOptions()
 app.UseRequestLocalization(localizationOptions);
 
 app.Run();
-//Salom Toshkent 
-//Erta bahor 
+//commit vboladimi

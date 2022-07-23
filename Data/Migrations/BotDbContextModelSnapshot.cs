@@ -7,7 +7,7 @@ using bot.Data;
 
 #nullable disable
 
-namespace bot.Data.Migrations
+namespace bot.Migrations
 {
     [DbContext(typeof(BotDbContext))]
     partial class BotDbContextModelSnapshot : ModelSnapshot
@@ -34,7 +34,7 @@ namespace bot.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ChoosenApps");
+                    b.ToTable("ChosenApps");
                 });
 
             modelBuilder.Entity("bot.Entity.Kompyuter", b =>
@@ -76,6 +76,29 @@ namespace bot.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Kompyuters");
+                });
+
+            modelBuilder.Entity("bot.Entity.MyComputer", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid?>("ComputerId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Link")
+                        .HasColumnType("TEXT");
+
+                    b.Property<long?>("UserId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MyComputers");
                 });
 
             modelBuilder.Entity("bot.Entity.Prog", b =>

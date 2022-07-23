@@ -9,10 +9,12 @@ public class BotDbContext : DbContext
 
     public DbSet<Prog>? Progs { get; set; }
 
-    public DbSet<ChosenApp>? ChoosenApps { get; set; }
+    public DbSet<MyComputer>? MyComputers { get; set; }
+
+    public DbSet<ChosenApp>? ChosenApps { get; set; }
 
     public DbSet<Kompyuter>? Kompyuters {get;set;}
 
-     public BotDbContext(DbContextOptions<BotDbContext> options)
+    public BotDbContext(DbContextOptions<BotDbContext> options)
         : base(options) { }
 }

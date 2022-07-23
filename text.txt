@@ -1,0 +1,72 @@
+Model: Acer Nitro 5 2022
+Price: 10 897 500 sum
+Grade: 8,5
+GPU: GeForce RTX™ 3050Ti 4GB
+Processor: Intel® Core™ i5-12500H
+RAM: 16 GB DDR4
+Storage: 512 GB m2 SSD
+ScreenSize: 15.6
+OS: Windows 11
+Pic: Nitro 5 2022
+
+
+Model: HP Pavilion Gaming 15
+Price: 11 050 000 sum
+Grade: 8
+GPU: GeForce RTX™ 3050Ti 4GB
+Processor: AMD® Ryzen™ 5-5600H
+RAM: 16 GB DDR4
+Storage: 512 GB m2 SSD
+ScreenSize: 15.6
+OS: Windows 11
+Pic: Pavilion Gaming 15
+
+
+Model: Asus TUF Gaming FX506
+Price: 8 103 000 sum
+Grade: 7
+GPU: GeForce GTX™ 1650 4GB
+Processor: Intel® Core™ i5-10300H
+RAM: 8 GB DDR4
+Storage: 256 GB m2 SSD
+ScreenSize: 15.6
+OS: Windows 11
+Pic: TUF FX506
+
+
+Model: Lenovo Legion 5 15
+Price: 8.5
+Grade: 8,5
+GPU: GeForce RTX™ 3060 6GB
+Processor: Intel® Core™ i5-11400H
+RAM: 16 GB DDR4
+Storage: 512 GB m2 SSD
+ScreenSize: 15.6
+OS: Windows 11
+Pic: Legion 5 15
+
+
+Model: HP Victus 16
+Price: 9 171 500 sum
+Grade: 7,5
+GPU: GeForce RTX™ 3050 4GB
+Processor: Intel® Core™ i5-11400H
+RAM: 8 GB DDR4
+Storage: 256 GB m2 SSD
+ScreenSize: 16
+OS: Windows 11
+Pic: Victus 16
+
+
+Model: MSI Bravo 15
+Price: 9 945 000 sum
+Grade: 7,5
+GPU: Radeon RX 5500M 4GB
+Processor: AMD® Ryzen™ 7-4800H
+RAM: 8 GB DDR4
+Storage: 256 GB m2 SSD
+ScreenSize: 15.6
+OS: Windows 11
+Pic: Bravo 15
+
+

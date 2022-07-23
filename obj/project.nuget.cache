@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "qIGA7FabBK3MArdt9T9Mja7ROzfqvEiZyupufF+MhNU9l3XjZvHPeWoI4qttZrgMt5xflFU9bf/+4f8BSQ8VnA==",
+  "dgSpecHash": "IgXJcftPTbSFCvIRuqNBPsKYnh+IHNvx9xG3nwGuOKCw2mVBdn56lVrT7jZbb2xTArsAMwVUmzBDd7456ruuGw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ogabe\\projects\\tempbot\\bot.csproj",
+  "projectFilePath": "C:\\Users\\ogabe\\projects\\bot\\bot.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\ogabe\\.nuget\\packages\\convertapi\\3.0.7\\convertapi.3.0.7.nupkg.sha512",
     "C:\\Users\\ogabe\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\ogabe\\.nuget\\packages\\microsoft.data.sqlite.core\\6.0.6\\microsoft.data.sqlite.core.6.0.6.nupkg.sha512",
     "C:\\Users\\ogabe\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.6\\microsoft.entityframeworkcore.6.0.6.nupkg.sha512",

@@ -125,4 +125,20 @@
     <value>💻 You can find out what kind of computer is right for you by choosing the right programs</value>
     <comment/>
   </data>
+  <data name="menu" xml:space="preserve">
+    <value>Choosing a computer|My computers|Settings|Contact</value>
+    <comment/>
+  </data>
+  <data name="progs" xml:space="preserve">
+    <value>Office programs|Graphic design|Video Editors|Programming environments|Browsers|Social networks|Games</value>
+    <comment/>
+  </data>
+  <data name="computer" xml:space="preserve">
+    <value>Kerakli dasturni tanlang English</value>
+    <comment/>
+  </data>
+  <data name="office" xml:space="preserve">
+    <value>Office dasturlari eng</value>
+    <comment/>
+  </data>
 </root>

@@ -14,6 +14,11 @@ public partial class BotUpdateHandler : IUpdateHandler
     private readonly IServiceScopeFactory _scopeFactory;
     private IStringLocalizer _localizer;
     private UserService _userService;
+    private ChosenAppService _chosenAppService;
+    private ProgService _progService;
+
+    private ComputerService _computerService;
+    
 
     public BotUpdateHandler(
         ILogger<BotUpdateHandler> logger,
@@ -27,17 +32,22 @@ public partial class BotUpdateHandler : IUpdateHandler
     public Task HandlePollingErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)
     {
         _logger.LogInformation("Error occured with Telegram Bot: {e.Message}", exception);
-
+    
         return Task.CompletedTask;
     }
 
     public async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
     {
         using var scope = _scopeFactory.CreateScope();
-
+        _computerService = scope.ServiceProvider.GetRequiredService<ComputerService>();
         _userService = scope.ServiceProvider.GetRequiredService<UserService>();
+        _chosenAppService = scope.ServiceProvider.GetRequiredService<ChosenAppService>();
+        _progService = scope.ServiceProvider.GetRequiredService<ProgService>();
+        
 
         var culture = await GetCultureForUser(update);
+        // var culture = new CultureInfo("uz-Uz");
+
         CultureInfo.CurrentCulture = culture;
         CultureInfo.CurrentUICulture = culture;
 
@@ -62,9 +72,9 @@ public partial class BotUpdateHandler : IUpdateHandler
         }
     }
 
-    private async Task<CultureInfo> GetCultureForUser(Update? update)
+    private async Task<CultureInfo> GetCultureForUser(Update update)
     {
-        User? from = update.Type switch
+        User from = update.Type switch
         {
             UpdateType.Message => update?.Message?.From,
             UpdateType.EditedMessage => update?.EditedMessage?.From,
@@ -74,31 +84,9 @@ public partial class BotUpdateHandler : IUpdateHandler
         };
 
 
-        var result = await _userService.AddUserAsync(new Entity.User()
-        {
-            FirstName = from.FirstName,
-            LastName = from.LastName,
-            ChatId = ( update.Message == null ? update.CallbackQuery.Message.Chat.Id:update.Message.Chat.Id),
-            IsBot = from.IsBot,
-            UserId = from.Id,
-            Username = from.Username,
-            LanguageCode = from.LanguageCode,
-            CreatedAt = DateTimeOffset.UtcNow,
-            LastInteractionAt = DateTimeOffset.UtcNow
-        });
+        
 
-
-        if(result.IsSuccess)
-        {
-            _logger.LogInformation("New user added: {from.Id}");
-        }
-        else
-        {
-            _logger.LogInformation("User not added: {from.Id}, {result.ErrorMessage}");
-        }
-
-        var language = await _userService.GetLanguageCodeAsync(from?.Id);
-
+        var language = await _userService.GetLanguageCodeAsync(from.Id);
         _logger.LogInformation($"Language set to: {language}");
         
         return new CultureInfo(language ?? "uz-Uz");

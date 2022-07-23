@@ -125,4 +125,20 @@
     <value>💻 Вы можете узнать, какой компьютер вам подходит, выбрав подходящие программы</value>
     <comment/>
   </data>
+  <data name="menu" xml:space="preserve">
+    <value>Выбор компьютера|Мои компьютеры|Настройки|Контакт</value>
+    <comment/>
+  </data>
+  <data name="progs" xml:space="preserve">
+    <value>Офисные программы|Графический дизайн|Видеоредакторы|Среды программирования|Браузеры|Социальные сети|Игры</value>
+    <comment/>
+  </data>
+  <data name="computer" xml:space="preserve">
+    <value>Kerakli dasturni tanlang Russian</value>
+    <comment/>
+  </data>
+  <data name="office" xml:space="preserve">
+    <value>Office dasturlari ru</value>
+    <comment/>
+  </data>
 </root>
