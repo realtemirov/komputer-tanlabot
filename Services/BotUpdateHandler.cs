@@ -46,6 +46,8 @@ public partial class BotUpdateHandler : IUpdateHandler
         
 
         var culture = await GetCultureForUser(update);
+
+
         CultureInfo.CurrentCulture = culture;
         CultureInfo.CurrentUICulture = culture;
 
@@ -55,7 +57,7 @@ public partial class BotUpdateHandler : IUpdateHandler
         {
             UpdateType.Message => HandleMessageAsync(botClient, update.Message, cancellationToken),
             UpdateType.EditedMessage => HandleEditMessageAsync(botClient, update.EditedMessage, cancellationToken),
-            UpdateType.CallbackQuery => HandleCallbackQueryAsync(botClient, update.CallbackQuery, cancellationToken),
+            UpdateType.CallbackQuery => HandleCallbackQueryAsync(botClient, update.CallbackQuery, cancellationToken),   
             // handle other updates
             _ => HandleUnknownUpdate(botClient, update, cancellationToken)
         };
@@ -72,7 +74,7 @@ public partial class BotUpdateHandler : IUpdateHandler
 
     private async Task<CultureInfo> GetCultureForUser(Update update)
     {
-        User from = update.Type switch
+        User? from = update.Type switch
         {
             UpdateType.Message => update?.Message?.From,
             UpdateType.EditedMessage => update?.EditedMessage?.From,
@@ -80,36 +82,13 @@ public partial class BotUpdateHandler : IUpdateHandler
             UpdateType.InlineQuery => update?.InlineQuery?.From,
             _ => update?.Message?.From
         };
-
-
-        var result = await _userService.AddUserAsync(new Entity.User()
-        {
-            FirstName = from.FirstName,
-            LastName = from.LastName,
-            ChatId = ( update.Message == null ? update.CallbackQuery.Message.Chat.Id:update.Message.Chat.Id),
-            IsBot = from.IsBot,
-            UserId = from.Id,
-            Username = from.Username,
-            LanguageCode = from.LanguageCode,
-            CreatedAt = DateTimeOffset.UtcNow,
-            LastInteractionAt = DateTimeOffset.UtcNow
-        });
-
-
-        if(result.IsSuccess)
-        {
-            _logger.LogInformation("New user added: {from.Id}");
-        }
-        else
-        {
-            _logger.LogInformation("User not added: {from.Id}, {result.ErrorMessage}");
-        }
-
         var language = await _userService.GetLanguageCodeAsync(from.Id);
         _logger.LogInformation($"Language set to: {language}");
         
         return new CultureInfo(language ?? "uz-Uz");
     }
+
+
 
     private Task HandleUnknownUpdate(ITelegramBotClient client, Update update, CancellationToken token)
     {

@@ -47,6 +47,4 @@ public class ProgService
 
     public async Task<bool> Exists(string query)
         => await _context.Progs.AnyAsync(p => p.Query == query);
-
-    
 }

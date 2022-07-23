@@ -38,7 +38,7 @@ public partial class BotUpdateHandler
         _logger.LogInformation(" MyCOmps NOT NULL");
 
         var comps = _computerService.GetAllCompsAsync().Result.Where(c => mycomps.Contains(c.Id)).ToList();
-        await CompToText(comps);
+        await CompToText(comps,user.Id);
 
         using(var stream = new FileStream("computer.pdf",FileMode.Open))
         {
@@ -59,7 +59,6 @@ public partial class BotUpdateHandler
         var filePath = Path.Combine(root, "main.jpg");
 
         var bytes = await System.IO.File.ReadAllBytesAsync(filePath, token);
-
         using var stream = new MemoryStream(bytes);
 
         await client.SendPhotoAsync(

@@ -70,7 +70,7 @@ public partial class BotUpdateHandler
         
         _logger.LogInformation(" progss NOT NULL");
 
-        var myComps = _computerService.GetAllCompsAsync().Result.Where(c => c.Grade >= maxPoint).OrderBy(c => c.Price).ToList();
+        var myComps = _computerService.GetAllCompsAsync().Result.Where(c => c.Grade >= maxPoint).ToList();
 
         var guid = Guid.NewGuid().ToString();
         await _computerService.DeleteMyComps(user.Id);
@@ -92,39 +92,17 @@ public partial class BotUpdateHandler
         AlertAsync(client, query, token,"Ma'lumotlaringiz yuborildi. Tez orada yetib boradi");
 
         _logger.LogInformation("Convert File");
-        await client.DeleteMessageAsync(user.Id, query.Message.MessageId, token);
-        await CompToText(myComps);
+        await CompToText(myComps,user.Id);
 
         await HandleMenu(client, query.Message, token);
         using(var stream = new FileStream("computer.pdf",FileMode.Open))
         {
             await client.SendDocumentAsync(user.Id, new InputOnlineFile(stream,$"{user.FirstName}ning komputerlari.pdf"), cancellationToken: token);                
         }
+        
+        await client.DeleteMessageAsync(user.Id, query.Message.MessageId, token);
+        
         _logger.LogInformation("File Send");
-    }
-
-    private async Task ShowComputersAsync(ITelegramBotClient client, CallbackQuery query, CancellationToken token)
-    {
-        var message = query.Message;
-        var from = message.From;
-        var user = message.Chat;
-        var allChosenApp = _chosenAppService.GetAllChosenAppAsync().Result.Where(c => c.UserId == user.Id).Select(p => p.ProgId).ToList();
-        var maxPoint = _progService.GetAllProgsAsync().Result.Where(p => allChosenApp.Contains(p.Id)).Max(p => p.Point);
-        var myComps = _computerService.GetAllCompsAsync().Result.Where(c => c.Grade >= maxPoint).OrderBy(c => c.Price).ToList();
-        var comps = myComps.Select(c => $"{c.ModelName} {c.Price}").ToList();
-        var compsStr = string.Join("\n", comps);
-        await client.SendTextMessageAsync(
-                            chatId: message.Chat.Id,
-                            text: compsStr,
-                            replyMarkup: new InlineKeyboardMarkup(
-                                new[]
-                                {
-                                    new[]
-                                    {
-                                        InlineKeyboardButton.WithCallbackData("Nazad", "menu")
-                                    }
-                                }),
-                            cancellationToken: token);
     }
 
     private async Task NoteSelectAsync(ITelegramBotClient client, CallbackQuery query, CancellationToken token)
@@ -137,8 +115,7 @@ public partial class BotUpdateHandler
         {
             _logger.LogError("Program is null");
         }
-        var queryShort = query.Data.ToString().Split("-")[0];
-
+        
 
         _logger.LogInformation(query.Data);
 
@@ -151,6 +128,7 @@ public partial class BotUpdateHandler
         }).Result;
         
         
+        var queryShort = query.Data.ToString().Split("-")[0];
 
         if (res.IsSuccess)
         {
@@ -173,7 +151,7 @@ public partial class BotUpdateHandler
 
     }
 
-    public async Task CompToText(List<Kompyuter> mycomps)
+    public async Task CompToText(List<Kompyuter> mycomps,long userId)
     {
         StringBuilder sb = new StringBuilder();
         foreach (var comp in mycomps)
@@ -193,9 +171,9 @@ public partial class BotUpdateHandler
             );
         }
         
-        System.IO.File.WriteAllText("text.txt",sb.ToString());
+        System.IO.File.WriteAllText($"{userId}.txt",sb.ToString());
         
-        await bot.Helpers.Convert.ConvertTxtToPdf();
+        await bot.Helpers.Convert.ConvertTxtToPdf(userId);
     }
 
     private async Task ProgsAsync(ITelegramBotClient client, CallbackQuery query, CancellationToken token)
