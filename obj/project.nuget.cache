@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "IgXJcftPTbSFCvIRuqNBPsKYnh+IHNvx9xG3nwGuOKCw2mVBdn56lVrT7jZbb2xTArsAMwVUmzBDd7456ruuGw==",
+  "dgSpecHash": "BXrpNWfXB7UBd+xTe9CUqGUCAG24JlY4P+yZbQD596wzcpSBJezMlPatQvlq2OMV8PQVwY1VuJII7IfnnwqNhQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ogabe\\projects\\bot\\bot.csproj",
+  "projectFilePath": "C:\\Users\\ogabe\\projects\\tempbot\\bot.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ogabe\\.nuget\\packages\\convertapi\\3.0.7\\convertapi.3.0.7.nupkg.sha512",
     "C:\\Users\\ogabe\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",

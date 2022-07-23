@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ogabe\\projects\\bot\\bot.csproj": {}
+    "C:\\Users\\ogabe\\projects\\tempbot\\bot.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ogabe\\projects\\bot\\bot.csproj": {
+    "C:\\Users\\ogabe\\projects\\tempbot\\bot.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ogabe\\projects\\bot\\bot.csproj",
+        "projectUniqueName": "C:\\Users\\ogabe\\projects\\tempbot\\bot.csproj",
         "projectName": "bot",
-        "projectPath": "C:\\Users\\ogabe\\projects\\bot\\bot.csproj",
+        "projectPath": "C:\\Users\\ogabe\\projects\\tempbot\\bot.csproj",
         "packagesPath": "C:\\Users\\ogabe\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ogabe\\projects\\bot\\obj\\",
+        "outputPath": "C:\\Users\\ogabe\\projects\\tempbot\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ogabe\\AppData\\Roaming\\NuGet\\NuGet.Config",
